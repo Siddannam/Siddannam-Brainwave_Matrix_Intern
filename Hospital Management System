@@ -1,1 +1,157 @@
+package HospitalManagement;
+
+import java.util.*;
+
+public class HospitalManagementSystem {
+
+    static class Patient {
+        String id, name, disease;
+        int age;
+        Patient(String id, String name, int age, String disease) {
+            this.id = id;
+            this.name = name;
+            this.age = age;
+            this.disease = disease;
+        }
+    }
+    static class Appointment {
+        String patientId, doctorName, date;
+        Appointment(String patientId, String doctorName, String date) {
+            this.patientId = patientId;
+            this.doctorName = doctorName;
+            this.date = date;
+        }
+    }
+    static class MedicalRecord {
+        String patientId, diagnosis, treatment;
+        MedicalRecord(String patientId, String diagnosis, String treatment) {
+            this.patientId = patientId;
+            this.diagnosis = diagnosis;
+            this.treatment = treatment;
+        }
+    }
+    static class Bill {
+        String patientId;
+        double amount;
+        Bill(String patientId, double amount) {
+            this.patientId = patientId;
+            this.amount = amount;
+        }
+    }
+    static class InventoryItem {
+        String itemName;
+        int quantity;
+        InventoryItem(String itemName, int quantity) {
+            this.itemName = itemName;
+            this.quantity = quantity;
+        }
+    }
+    static class Staff {
+        String staffId, name, role;
+        Staff(String staffId, String name, String role) {
+            this.staffId = staffId;
+            this.name = name;
+            this.role = role;
+        }
+    }
+
+    static List<HospitalManagement.HospitalManagementSystem.Patient> patients = new ArrayList<>();
+    static List<HospitalManagement.HospitalManagementSystem.Appointment> appointments = new ArrayList<>();
+    static List<HospitalManagement.HospitalManagementSystem.MedicalRecord> records = new ArrayList<>();
+    static List<HospitalManagement.HospitalManagementSystem.Bill> bills = new ArrayList<>();
+    static List<HospitalManagement.HospitalManagementSystem.InventoryItem> inventory = new ArrayList<>();
+    static List<HospitalManagement.HospitalManagementSystem.Staff> staffList = new ArrayList<>();
+    static Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) {
+        while (true) {
+            System.out.println("\n--- Hospital Management System ---");
+            System.out.println("1. Register Patient");
+            System.out.println("2. Schedule Appointment");
+            System.out.println("3. Add EHR Record");
+            System.out.println("4. Generate Bill");
+            System.out.println("5. Manage Inventory");
+            System.out.println("6. Manage Staff");
+            System.out.println("7. Exit");
+            System.out.print("Select an option: ");
+
+            int choice = scanner.nextInt(); scanner.nextLine();
+            switch (choice) {
+                case 1 -> registerPatient();
+                case 2 -> scheduleAppointment();
+                case 3 -> addEHR();
+                case 4 -> generateBill();
+                case 5 -> manageInventory();
+                case 6 -> manageStaff();
+                case 7 -> System.exit(0);
+                default -> System.out.println("Invalid choice.");
+            }
+        }
+    }
+
+    static void registerPatient() {
+        System.out.print("Enter Patient ID: ");
+        String id = scanner.nextLine();
+        System.out.print("Enter Patient Name: ");
+        String name = scanner.nextLine();
+        System.out.print("Enter Age: ");
+        int age = scanner.nextInt(); scanner.nextLine();
+        System.out.print("Enter Disease: ");
+        String disease = scanner.nextLine();
+        patients.add(new HospitalManagement.HospitalManagementSystem.Patient(id, name, age, disease));
+        System.out.println("Patient registered successfully.");
+    }
+
+    static void scheduleAppointment() {
+        System.out.print("Enter Patient ID: ");
+        String pid = scanner.nextLine();
+        System.out.print("Enter Doctor Name: ");
+        String doctor = scanner.nextLine();
+        System.out.print("Enter Date (yyyy-mm-dd): ");
+        String date = scanner.nextLine();
+        appointments.add(new HospitalManagement.HospitalManagementSystem.Appointment(pid, doctor, date));
+        System.out.println("Appointment scheduled.");
+    }
+
+    static void addEHR() {
+        System.out.print("Enter Patient ID: ");
+        String pid = scanner.nextLine();
+        System.out.print("Enter Diagnosis: ");
+        String diagnosis = scanner.nextLine();
+        System.out.print("Enter Treatment: ");
+        String treatment = scanner.nextLine();
+        records.add(new HospitalManagement.HospitalManagementSystem.MedicalRecord(pid, diagnosis, treatment));
+        System.out.println("EHR record added.");
+    }
+
+    static void generateBill() {
+        System.out.print("Enter Patient ID: ");
+        String pid = scanner.nextLine();
+        System.out.print("Enter Amount: ");
+        double amount = scanner.nextDouble(); scanner.nextLine();
+        bills.add(new HospitalManagement.HospitalManagementSystem.Bill(pid, amount));
+        System.out.println("Bill generated.");
+    }
+
+    static void manageInventory() {
+        System.out.print("Enter Item Name: ");
+        String name = scanner.nextLine();
+        System.out.print("Enter Quantity: ");
+        int qty = scanner.nextInt(); scanner.nextLine();
+        inventory.add(new HospitalManagement.HospitalManagementSystem.InventoryItem(name, qty));
+        System.out.println("Inventory updated.");
+    }
+
+    static void manageStaff() {
+        System.out.print("Enter Staff ID: ");
+        String sid = scanner.nextLine();
+        System.out.print("Enter Staff Name: ");
+        String name = scanner.nextLine();
+        System.out.print("Enter Role: ");
+        String role = scanner.nextLine();
+        staffList.add(new HospitalManagement.HospitalManagementSystem.Staff(sid, name, role));
+        System.out.println("Staff added.");
+    }
+}
+
 
